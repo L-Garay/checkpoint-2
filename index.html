@@ -10,10 +10,19 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <script
+      src="https://kit.fontawesome.com/82e8f37917.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="style.css" />
     <title>Miner</title>
   </head>
-  <body>
+  <body
+    onload="updateSwords();
+  updateBow();
+  updateSpikes();
+  updateCompanions();"
+  >
     <header>
       <div class="container  d-flex justify-content-center">
         <div class="row">
@@ -33,32 +42,50 @@
         </div>
         <div class="row m-4">
           <div class="col-md-6 btn-style">
-            <button class="btn btn-lg btn-info" onclick="buysword()">
-              <span id="btn-image"></span>Sword = $<span
+            <button
+              class="btn btn-lg btn-info"
+              onclick="buysword()"
+              id="sword-button"
+            >
+            <i class="fas fa-hammer"></i></span>Sword = $<span
                 id="sword-price"
               ></span>
             </button>
-            <h4>=<span id="mod"></span></h4>
+            <h4>=<span id="sword-mod"></span> x 2</h4>
           </div>
           <div class="col-md-6 btn-style">
-            <button class="btn btn-lg btn-info" onclick="buybow()">
-              <span id="btn-image"></span>Bow<span id="bow-price"></span>
+            <button
+              class="btn btn-lg btn-info"
+              onclick="buybow()"
+              id="bow-button"
+            >
+            <i class="fab fa-autoprefixer"></i></span>Bow = $<span id="bow-price"></span>
             </button>
-            <h4>=<span id="mod"></span></h4>
+            <h4>=<span id="bow-mod"></span> x 5</h4>
           </div>
           <div class="col-md-6 btn-style">
-            <button class="btn btn-lg btn-info" onclick="buyspikes()">
-              <span id="btn-image"></span>Spikes<span id="spikes-price"></span>
+            <button
+              class="btn btn-lg btn-info"
+              onclick="buyspikes()"
+              id="spikes-button"
+            >
+            <i class="fab fa-fort-awesome"></i></span>Spikes = $<span
+                id="spikes-price"
+              ></span>
             </button>
-            <h4>=<span id="mod"></span></h4>
+            <h4>=<span id="spikes-mod"></span> x 20</h4>
           </div>
           <div class="col-md-6 btn-style">
-            <button class="btn btn-lg btn-info" onclick="buycompanions()">
-              <span id="btn-image"></span>Companions<span
+            <button
+              class="btn btn-lg btn-info"
+              onclick="buycompanions()"
+              id="companions-button"
+            >
+            <i class="fas fa-user-ninja"></i></span>Companions = $<span
                 id="companions-price"
               ></span>
             </button>
-            <h4>=<span id="mod"></span></h4>
+            <h4>=<span id="companions-mod"></span> x 30</h4>
           </div>
         </div>
       </div>

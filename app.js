@@ -3,41 +3,84 @@ let killElem = document.querySelector("#kill-count");
 let swordPrice = document.querySelector("#sword-price");
 let bowPrice = document.querySelector("#bow-price");
 let spikesPrice = document.querySelector("#spikes-price");
+let companionsPrice = document.querySelector("#companions-price");
+let swordBtn = document.querySelector("#sword-button");
+let bowBtn = document.querySelector("#bow-button");
+let spikesBtn = document.querySelector("#spikes-button");
+let companionsBtn = document.querySelector("#companions-button");
+let swordMod = document.querySelector("#sword-mod");
+let bowMod = document.querySelector("#bow-mod");
+let spikesMod = document.querySelector("#spikes-mod");
+let companionsMod = document.querySelector("#companions-mod");
 
 function kill() {
   orcsSlain++;
   orcsSlain += clickUpgrades.sword.quantity * clickUpgrades.sword.damage;
   orcsSlain += clickUpgrades.bow.quantity * clickUpgrades.bow.damage;
   orcsSlain += clickUpgrades.spikes.quantity * clickUpgrades.spikes.damage;
-
   countKills();
-  updateSwords();
 }
 function countKills() {
   killElem.innerText = orcsSlain;
 }
 function updateSwords() {
-  if (clickUpgrades.sword.price[0]) {
+  if (clickUpgrades.sword.priceIndex == 0) {
     swordPrice.innerText = clickUpgrades.sword.price[0];
-  } else {
+  } else if (clickUpgrades.sword.priceIndex == 1) {
     swordPrice.innerText = clickUpgrades.sword.price[1];
   }
+  if (orcsSlain < clickUpgrades.sword.price[0]) {
+    swordBtn.setAttribute("disabled", "true");
+  } else if (
+    clickUpgrades.sword.priceIndex == 1 &&
+    orcsSlain < clickUpgrades.sword.price[1]
+  ) {
+    swordBtn.setAttribute("disabled", "true");
+  } else if (orcsSlain > clickUpgrades.sword.price[0]) {
+    swordBtn.removeAttribute("disabled");
+  }
+  swordMod.innerText = clickUpgrades.sword.quantity;
+}
+function updateBow() {
+  if (clickUpgrades.bow.priceIndex == 0) {
+    bowPrice.innerText = clickUpgrades.bow.price[0];
+  } else {
+    bowPrice.innerText = clickUpgrades.bow.price[1];
+  }
+  bowMod.innerText = clickUpgrades.bow.quantity;
+}
+function updateSpikes() {
+  if (clickUpgrades.spikes.priceIndex == 0) {
+    spikesPrice.innerText = clickUpgrades.spikes.price[0];
+  } else {
+    spikesPrice.innerText = clickUpgrades.spikes.price[1];
+  }
+  spikesMod.innerText = clickUpgrades.spikes.quantity;
+}
+function updateCompanions() {
+  if ((autoUpgrades.companions.price = 150)) {
+    companionsPrice.innerText = autoUpgrades.companions.price;
+  }
+  companionsMod.innerText = autoUpgrades.companions.quantity;
 }
 
 let clickUpgrades = {
   sword: {
     price: [10, 50],
+    priceIndex: 0,
     damage: 2,
     quantity: 0
   },
   bow: {
     price: [20, 75],
+    priceIndex: 0,
     damage: 5,
     quantity: 0
   },
   spikes: {
     price: [50, 150],
-    damage: 40,
+    priceIndex: 0,
+    damage: 20,
     quantity: 0
   }
 };
@@ -56,6 +99,9 @@ function buysword() {
   } else {
     orcsSlain -= clickUpgrades.sword.price[1];
   }
+  if (clickUpgrades.sword.quantity == 10) {
+    clickUpgrades.sword.priceIndex++;
+  }
   countKills();
   updateSwords();
 }
@@ -66,8 +112,11 @@ function buybow() {
   } else {
     orcsSlain -= clickUpgrades.bow.price[1];
   }
+  if (clickUpgrades.bow.quantity == 5) {
+    clickUpgrades.bow.priceIndex++;
+  }
   countKills();
-  updateSwords();
+  updateBow();
 }
 function buyspikes() {
   clickUpgrades.spikes.quantity++;
@@ -76,8 +125,11 @@ function buyspikes() {
   } else {
     orcsSlain -= clickUpgrades.spikes.price[1];
   }
+  if (clickUpgrades.spikes.quantity == 3) {
+    clickUpgrades.spikes.priceIndex++;
+  }
   countKills();
-  updateSwords();
+  updateSpikes();
 }
 function buycompanions() {
   autoUpgrades.companions.quantity++;
