@@ -36,8 +36,12 @@ button:disabled {
   color: black;
 }
 .stockpile {
-  border: 2px solid red;
+  border: 2px solid black;
   background-image: linear-gradient(red, yellow);
   color: white;
   text-shadow: 15px 5px 15px black;
+  font-size: small;
+}
+h2 {
+  border: 2px solid black;
 }
