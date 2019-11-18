@@ -13,6 +13,12 @@ let swordMod = document.querySelector("#sword-mod");
 let bowMod = document.querySelector("#bow-mod");
 let spikesMod = document.querySelector("#spikes-mod");
 let companionsMod = document.querySelector("#companions-mod");
+let modTotal = document.querySelector("#total-mod");
+let autoKills = document.querySelector("#auto-kills");
+let SUBtn = document.querySelector("#sword-upgrade-btn");
+let BUBtn = document.querySelector("#bow-upgrade-btn");
+let SpUBtn = document.querySelector("#spikes-upgrade-btn");
+let CUBtn = document.querySelector("companions-upgrade-btn");
 
 //Counting function
 function kill() {
@@ -44,6 +50,11 @@ function updateSwords() {
   } else {
     swordBtn.removeAttribute("disabled");
   }
+  if (orcsSlain < 10000) {
+    SUBtn.setAttribute("disabled", "true");
+  } else {
+    SUBtn.removeAttribute("disabled");
+  }
 }
 function updateBow() {
   if (clickUpgrades.bow.priceIndex == 0) {
@@ -60,6 +71,11 @@ function updateBow() {
     bowBtn.setAttribute("disabled", "true");
   } else {
     bowBtn.removeAttribute("disabled");
+  }
+  if (orcsSlain < 35000) {
+    BUBtn.setAttribute("disabled", "true");
+  } else {
+    BUBtn.removeAttribute("disabled");
   }
   bowMod.innerText = clickUpgrades.bow.quantity;
 }
@@ -80,6 +96,11 @@ function updateSpikes() {
   } else {
     spikesBtn.removeAttribute("disabled");
   }
+  if (orcsSlain < 50000) {
+    SpUBtn.setAttribute("disabled", "true");
+  } else {
+    SpUBtn.removeAttribute("disabled");
+  }
 }
 function updateCompanions() {
   if (autoUpgrades.companions.priceIndex == 0) {
@@ -97,6 +118,11 @@ function updateCompanions() {
     companionsBtn.setAttribute("disabled", "true");
   } else {
     companionsBtn.removeAttribute("disabled");
+  }
+  if (orcsSlain < 100000) {
+    CUBtn.setAttribute("disabled", "true");
+  } else {
+    CUBtn.removeAttribute("disabled");
   }
 }
 
@@ -144,6 +170,11 @@ function buysword() {
   }
   callEveryone();
 }
+function buyBetterSword() {
+  clickUpgrades.sword.damage *= 5;
+  orcsSlain -= 10000;
+  callEveryone();
+}
 function buybow() {
   clickUpgrades.bow.quantity++;
   if (clickUpgrades.bow.quantity <= 5) {
@@ -154,6 +185,11 @@ function buybow() {
   if (clickUpgrades.bow.quantity == 5) {
     clickUpgrades.bow.priceIndex++;
   }
+  callEveryone();
+}
+function buyBetterBow() {
+  clickUpgrades.bow.damage *= 4;
+  orcsSlain -= 35000;
   callEveryone();
 }
 function buyspikes() {
@@ -168,6 +204,11 @@ function buyspikes() {
   }
   callEveryone();
 }
+function buyBetterSpikes() {
+  clickUpgrades.spikes.damage *= 2;
+  orcsSlain -= 50000;
+  callEveryone();
+}
 function buycompanions() {
   autoUpgrades.companions.quantity++;
   if (autoUpgrades.companions.quantity <= 2) {
@@ -180,7 +221,11 @@ function buycompanions() {
   }
   callEveryone();
 }
-
+function buyBetterCompanions() {
+  autoUpgrades.companions.damage *= 5;
+  orcsSlain -= 100000;
+  callEveryone();
+}
 // Auto upgrade functions
 function collectAutoUpgrades() {
   orcsSlain += autoUpgrades.companions.quantity * 30;
@@ -199,4 +244,19 @@ function callEveryone() {
   updateSpikes();
   updateCompanions();
   updateBow();
+  modCount();
+}
+let modSum;
+let autoSum;
+function modCount() {
+  modSum = 0;
+  autoSum = 0;
+  modSum =
+    clickUpgrades.sword.quantity * clickUpgrades.sword.damage +
+    clickUpgrades.bow.quantity * clickUpgrades.bow.damage +
+    clickUpgrades.spikes.quantity * clickUpgrades.spikes.damage +
+    1;
+  modTotal.innerText = modSum;
+  autoSum = autoUpgrades.companions.quantity * autoUpgrades.companions.damage;
+  autoKills.innerText = autoSum;
 }
