@@ -5,28 +5,39 @@ body {
 }
 
 main {
-  flex-grow: 2;
+  flex-grow: 1;
 }
 .btn-style {
   display: flex;
   font-size: 10pt;
   margin-top: 0.5rem;
+  justify-content: space-around;
 }
 .text {
   color: red;
   text-shadow: 2px 2px yellow;
 }
 .picture {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
+  border: 1px solid yellow;
+  cursor: pointer;
 }
 
 .btn {
   background-color: firebrick;
-  border: 3px solid black;
+  border: 3px solid yellow;
+  color: yellow;
 }
 
 button:disabled {
   background-color: white;
   border: 3px solid grey;
+  color: black;
+}
+.stockpile {
+  border: 2px solid red;
+  background-image: linear-gradient(red, yellow);
+  color: white;
+  text-shadow: 15px 5px 15px black;
 }
