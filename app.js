@@ -18,7 +18,7 @@ let autoKills = document.querySelector("#auto-kills");
 let SUBtn = document.querySelector("#sword-upgrade-btn");
 let BUBtn = document.querySelector("#bow-upgrade-btn");
 let SpUBtn = document.querySelector("#spikes-upgrade-btn");
-let CUBtn = document.querySelector("companions-upgrade-btn");
+let CUBtn = document.querySelector("#companions-upgrade-btn");
 
 //Counting function
 function kill() {
